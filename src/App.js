@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const ContributionGraph = () => {
   const today = new Date();
   const startDate = new Date(today);
   startDate.setDate(startDate.getDate() - 357);
+  const [contributionsData, setContributionsData] = useState(null);
 
   const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
@@ -33,6 +34,29 @@ const ContributionGraph = () => {
     };
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://dpg.gg/test/calendar.json');
+        const data = await response.json();
+        setContributionsData(data);
+      } catch (error) {
+        console.error('Error fetching contributions data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const getColorClass = (contributions) => {
+    if (contributions === 0) return 'no-contributions';
+    else if (contributions >= 1 && contributions <= 9) return 'low-contributions';
+    else if (contributions >= 10 && contributions <= 19) return 'medium-contributions';
+    else if (contributions >= 20 && contributions <= 29) return 'high-contributions';
+    else return 'very-high-contributions';
+  };
+
+
   return (
     <div className="contribution-wrapper">
       <div className="contribution-graph">
@@ -57,7 +81,7 @@ const ContributionGraph = () => {
                   <div className="days">
                     {week.days.map((day) => (
                       <div key={day.dayNumber} className={`day ${day.date === today.toISOString().slice(0, 10) ? 'current-day' : ''}`} data-date={day.date}>
-                        <div className="contribution-cell"></div>
+                        <div className={`contribution-cell ${getColorClass(contributionsData?.[day.date] || 0)}`}></div>
                         { }
                       </div>
                     ))}

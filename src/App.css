@@ -56,6 +56,27 @@
   cursor: pointer;
 }
 
+.low-contributions {
+  background-color: #ACD5F2;
+}
+
+.medium-contributions {
+  background-color: #7FA8C9;
+}
+
+.high-contributions {
+  background-color: #527BA0;
+}
+
+.very-high-contributions{
+  background-color: #254E77;
+}
+
+.no-contributions {
+  background-color: #EDEDED;
+}
+
+
 .contribution-cell:hover {
   outline: 1px solid #000;
 }
