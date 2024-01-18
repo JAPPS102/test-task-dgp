@@ -54,6 +54,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 }
 
 .low-contributions {
@@ -81,8 +82,63 @@
   outline: 1px solid #000;
 }
 
+.selected-cell .contribution-cell {
+  outline: 1px solid #000;
+}
+
 .days {
   display: grid;
   grid-template-rows: 7;
   gap: 2px;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #000;
+  border-radius: 3px;
+  padding: 5px 10px;
+  z-index: 999;
+  top: -50px;
+  min-width: 145px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrowTooltip {
+  position: absolute;
+  bottom: -20px;
+
+  border: 10px solid transparent;
+  border-top: 10px solid #000;
+}
+
+.countContribution {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 400;
+}
+
+.dateContribution{
+  color: #7C7C7C;
+  font-size: 10px;
+}
+
+.contribution-graph-clue {
+  display: flex;
+  align-items: center;
+  font-size: 8px;
+  margin-top: 15px;
+}
+
+.contribution-graph-clue .contribution-cell {
+  margin-right: 2px;
+}
+
+.contribution-graph-clue .title {
+  margin-right: 5px;
+}
+
+.contribution-graph-clue .title:last-child {
+  margin-left: 5px;
 }
